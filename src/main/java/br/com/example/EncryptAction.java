@@ -48,10 +48,11 @@ public class EncryptAction implements Action{
         return null;
     }
 
-    public String encrypt(String pText) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    private String encrypt(String pText) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         byte[] encryptedText = encryptWithPrefixIV(pText.getBytes(StandardCharsets.UTF_8), this.secretKey, generateIV());
         return Base64.getEncoder().encodeToString(encryptedText);
     }
+
     private byte[] encryptWithPrefixIV(byte[] pText, SecretKey secret, byte[] iv) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeyException {
         byte[] cipherText = encrypt(pText, secret, iv);
         byte[] cipherTextWithIv = ByteBuffer.allocate(iv.length + cipherText.length)
