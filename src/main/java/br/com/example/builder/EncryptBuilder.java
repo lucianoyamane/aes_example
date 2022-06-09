@@ -8,8 +8,8 @@ public class EncryptBuilder implements Builder {
 
     private SecretKey secretKey;
     private String encryptAlgo;
-    private Integer tagLenghtBit;
-    private Integer ivLenghtByte;
+    private Integer tagLengthBit;
+    private Integer ivLengthByte;
 
     public static EncryptBuilder init() {
         return new EncryptBuilder();
@@ -32,19 +32,19 @@ public class EncryptBuilder implements Builder {
 
     @Override
     public Builder tagLengthBit(Integer tagLengthBit) {
-        this.tagLenghtBit = tagLengthBit;
+        this.tagLengthBit = tagLengthBit;
         return this;
     }
 
     @Override
     public Builder ivLengthByte(Integer ivLengthByte) {
-        this.ivLenghtByte = ivLengthByte;
+        this.ivLengthByte = ivLengthByte;
         return this;
     }
 
     @Override
     public EncryptAction build() {
-        return EncryptAction.config(this.secretKey, this.encryptAlgo, this.tagLenghtBit, this.ivLenghtByte);
+        return EncryptAction.config(this.secretKey, this.encryptAlgo, this.tagLengthBit, this.ivLengthByte);
     }
 
 

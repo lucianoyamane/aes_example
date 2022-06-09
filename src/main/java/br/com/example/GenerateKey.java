@@ -1,5 +1,7 @@
 package br.com.example;
 
+import br.com.example.properties.ValueProperties;
+
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -8,13 +10,11 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 public class GenerateKey {
-    private static final int AES_KEY_BIT = 256;
-    private static final String ALGORITHM = "AES";
 
     public static String generateKeyBase64() {
         SecretKey secretKey = null;
         try {
-            secretKey = getAESKey(AES_KEY_BIT);
+            secretKey = getAESKey(ValueProperties.instance().aesKeyBit());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -23,12 +23,12 @@ public class GenerateKey {
 
     public static SecretKey toSecretKey(String keyBase64) {
         byte[] decodedKey = Base64.getDecoder().decode(keyBase64);
-        return new SecretKeySpec(decodedKey, 0, decodedKey.length, ALGORITHM);
+        return new SecretKeySpec(decodedKey, 0, decodedKey.length, ValueProperties.instance().algorithm());
     }
 
-    private static SecretKey getAESKey(int keysize) throws NoSuchAlgorithmException {
-        KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
-        keyGen.init(keysize, SecureRandom.getInstanceStrong());
+    private static SecretKey getAESKey(int keySize) throws NoSuchAlgorithmException {
+        KeyGenerator keyGen = KeyGenerator.getInstance(ValueProperties.instance().algorithm());
+        keyGen.init(keySize, SecureRandom.getInstanceStrong());
         return keyGen.generateKey();
     }
 }
