@@ -11,8 +11,13 @@ public class GenerateKey {
     private static final int AES_KEY_BIT = 256;
     private static final String ALGORITHM = "AES";
 
-    public static String generateKeyBase64() throws NoSuchAlgorithmException {
-        SecretKey secretKey = getAESKey(AES_KEY_BIT);
+    public static String generateKeyBase64() {
+        SecretKey secretKey = null;
+        try {
+            secretKey = getAESKey(AES_KEY_BIT);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         return Base64.getEncoder().encodeToString(secretKey.getEncoded());
     }
 
