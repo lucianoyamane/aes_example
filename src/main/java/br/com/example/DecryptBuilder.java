@@ -2,12 +2,12 @@ package br.com.example;
 
 import javax.crypto.SecretKey;
 
-public class DecryptBuilder {
+public class DecryptBuilder implements Builder{
 
     private SecretKey secretKey;
     private String encryptAlgo;
-    private Integer ivLenghtByte;
-    private Integer tagLenghtBit;
+    private Integer ivLengthByte;
+    private Integer tagLengthBit;
 
     private DecryptBuilder() {
     }
@@ -16,27 +16,32 @@ public class DecryptBuilder {
         return new DecryptBuilder();
     }
 
-    public DecryptBuilder secretKey(SecretKey secretKey) {
+    @Override
+    public Builder secretKey(SecretKey secretKey) {
         this.secretKey = secretKey;
         return this;
     }
 
-    public DecryptBuilder encryptAlgo(String encryptAlgo) {
+    @Override
+    public Builder encryptAlgo(String encryptAlgo) {
         this.encryptAlgo = encryptAlgo;
         return this;
     }
 
-    public DecryptBuilder ivLenghtByte(Integer ivLenghtByte) {
-        this.ivLenghtByte = ivLenghtByte;
+    @Override
+    public Builder ivLengthByte(Integer ivLengthByte) {
+        this.ivLengthByte = ivLengthByte;
         return this;
     }
 
-    public DecryptBuilder tagLenghtBit(Integer tagLenghtBit) {
-        this.tagLenghtBit = tagLenghtBit;
+    @Override
+    public Builder tagLengthBit(Integer tagLengthBit) {
+        this.tagLengthBit = tagLengthBit;
         return this;
     }
 
+    @Override
     public DecryptAction build() {
-        return DecryptAction.config(this.secretKey, this.encryptAlgo, this.tagLenghtBit, this.ivLenghtByte);
+        return DecryptAction.config(this.secretKey, this.encryptAlgo, this.tagLengthBit, this.ivLengthByte);
     }
 }

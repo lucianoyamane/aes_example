@@ -27,21 +27,22 @@ public class CryptoDirector {
     }
 
     public String decrypt(String cText){
-        DecryptAction decryptAction = DecryptBuilder.init()
-                                                    .secretKey(this.getSecretKey())
-                                                    .encryptAlgo(ENCRYPT_ALGO)
-                                                    .tagLenghtBit(TAG_LENGTH_BIT)
-                                                    .ivLenghtByte(IV_LENGTH_BYTE).build();
+        Action decryptAction = buildAction(DecryptBuilder.init());
         return decryptAction.execute(cText);
     }
 
     public String encrypt(String pText){
-        EncryptAction encryptAction = EncryptBuilder.init()
-                                                .secretKey(this.getSecretKey())
-                                                .encryptAlgo(ENCRYPT_ALGO)
-                                                .tagLenghtBit(TAG_LENGTH_BIT)
-                                                .ivLenghtByte(IV_LENGTH_BYTE).build();
+        Action encryptAction = buildAction(EncryptBuilder.init());
         return encryptAction.execute(pText);
+    }
+
+    private Action buildAction(Builder builder) {
+        return builder
+                .secretKey(this.getSecretKey())
+                .encryptAlgo(ENCRYPT_ALGO)
+                .tagLengthBit(TAG_LENGTH_BIT)
+                .ivLengthByte(IV_LENGTH_BYTE)
+                .build();
     }
 
 }

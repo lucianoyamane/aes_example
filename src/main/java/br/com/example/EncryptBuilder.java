@@ -2,7 +2,7 @@ package br.com.example;
 
 import javax.crypto.SecretKey;
 
-public class EncryptBuilder {
+public class EncryptBuilder implements Builder{
 
     private SecretKey secretKey;
     private String encryptAlgo;
@@ -16,26 +16,31 @@ public class EncryptBuilder {
     private EncryptBuilder() {
     }
 
-    public EncryptBuilder secretKey(SecretKey secretKey) {
+    @Override
+    public Builder secretKey(SecretKey secretKey) {
         this.secretKey = secretKey;
         return this;
     }
 
-    public EncryptBuilder encryptAlgo(String encryptAlgo) {
+    @Override
+    public Builder encryptAlgo(String encryptAlgo) {
         this.encryptAlgo = encryptAlgo;
         return this;
     }
 
-    public EncryptBuilder tagLenghtBit(Integer tagLenghtBit) {
-        this.tagLenghtBit = tagLenghtBit;
+    @Override
+    public Builder tagLengthBit(Integer tagLengthBit) {
+        this.tagLenghtBit = tagLengthBit;
         return this;
     }
 
-    public EncryptBuilder ivLenghtByte(Integer ivLenghtByte) {
-        this.ivLenghtByte = ivLenghtByte;
+    @Override
+    public Builder ivLengthByte(Integer ivLengthByte) {
+        this.ivLenghtByte = ivLengthByte;
         return this;
     }
 
+    @Override
     public EncryptAction build() {
         return EncryptAction.config(this.secretKey, this.encryptAlgo, this.tagLenghtBit, this.ivLenghtByte);
     }
