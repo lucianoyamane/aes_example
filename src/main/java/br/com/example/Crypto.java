@@ -30,11 +30,21 @@ public class Crypto {
     }
 
     public String decrypt(String cText){
-        return DecryptAction.config(this.getSecretKey(), ENCRYPT_ALGO, TAG_LENGTH_BIT, IV_LENGTH_BYTE).execute(cText);
+        DecryptAction decryptAction = DecryptBuilder.init()
+                                                    .secretKey(this.getSecretKey())
+                                                    .encryptAlgo(ENCRYPT_ALGO)
+                                                    .tagLenghtBit(TAG_LENGTH_BIT)
+                                                    .ivLenghtByte(IV_LENGTH_BYTE).build();
+        return decryptAction.execute(cText);
     }
 
     public String encrypt(String pText){
-        return EncryptAction.config(this.getSecretKey(),ENCRYPT_ALGO, TAG_LENGTH_BIT, IV_LENGTH_BYTE).execute(pText);
+        EncryptAction encryptAction = EncryptBuilder.init()
+                                                .secretKey(this.getSecretKey())
+                                                .encryptAlgo(ENCRYPT_ALGO)
+                                                .tagLenghtBit(TAG_LENGTH_BIT)
+                                                .ivLenghtByte(IV_LENGTH_BYTE).build();
+        return encryptAction.execute(pText);
     }
 
 }
