@@ -13,35 +13,30 @@ public class DecryptAction implements Action{
 
     private SecretKey secretKey;
     private String encryptAlgo;
-    private Integer ivLenghtByte;
-    private Integer tagLenghtBit;
+    private Integer ivLengthByte;
+    private Integer tagLengthBit;
 
     public static DecryptAction config(SecretKey secretKey, String encryptAlgo, Integer tagLenghtBit, Integer ivLenghtByte) {
         return new DecryptAction(secretKey, encryptAlgo, tagLenghtBit, ivLenghtByte);
     }
 
-    public DecryptAction(SecretKey secretKey, String encryptAlgo, Integer tagLenghtBit, Integer ivLenghtByte) {
+    public DecryptAction(SecretKey secretKey, String encryptAlgo, Integer tagLengthBit, Integer ivLengthByte) {
         this.secretKey = secretKey;
         this.encryptAlgo = encryptAlgo;
-        this.tagLenghtBit = tagLenghtBit;
-        this.ivLenghtByte = ivLenghtByte;
+        this.tagLengthBit = tagLengthBit;
+        this.ivLengthByte = ivLengthByte;
     }
 
     @Override
     public String execute(String cText) {
         try {
             return decrypt(cText);
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
+        } catch (InvalidAlgorithmParameterException |
+                NoSuchPaddingException |
+                IllegalBlockSizeException |
+                NoSuchAlgorithmException |
+                BadPaddingException |
+                InvalidKeyException e) {
             e.printStackTrace();
         }
         return null;
@@ -56,7 +51,7 @@ public class DecryptAction implements Action{
 
         ByteBuffer bb = ByteBuffer.wrap(cText);
 
-        byte[] iv = new byte[this.ivLenghtByte];
+        byte[] iv = new byte[this.ivLengthByte];
         bb.get(iv);
 
         byte[] cipherText = new byte[bb.remaining()];
@@ -69,7 +64,7 @@ public class DecryptAction implements Action{
     private String decrypt(byte[] cText, SecretKey secret, byte[] iv) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
         Cipher cipher = Cipher.getInstance(this.encryptAlgo);
-        cipher.init(Cipher.DECRYPT_MODE, secret, new GCMParameterSpec(this.tagLenghtBit, iv));
+        cipher.init(Cipher.DECRYPT_MODE, secret, new GCMParameterSpec(this.tagLengthBit, iv));
         byte[] plainText = cipher.doFinal(cText);
         return new String(plainText, StandardCharsets.UTF_8);
     }

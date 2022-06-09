@@ -14,35 +14,30 @@ public class EncryptAction implements Action{
 
     private SecretKey secretKey;
     private String encryptAlgo;
-    private Integer tagLenghtBit;
-    private Integer ivLenghtByte;
+    private Integer tagLengthBit;
+    private Integer ivLengthByte;
 
     public static EncryptAction config(SecretKey secretKey, String encryptAlgo, Integer tagLenghtBit, Integer ivLenghtByte) {
         return new EncryptAction(secretKey, encryptAlgo, tagLenghtBit, ivLenghtByte);
     }
 
-    private EncryptAction(SecretKey secretKey, String encryptAlgo, Integer tagLenghtBit, Integer ivLenghtByte) {
+    private EncryptAction(SecretKey secretKey, String encryptAlgo, Integer tagLengthBit, Integer ivLengthByte) {
         this.secretKey = secretKey;
         this.encryptAlgo = encryptAlgo;
-        this.tagLenghtBit = tagLenghtBit;
-        this.ivLenghtByte = ivLenghtByte;
+        this.tagLengthBit = tagLengthBit;
+        this.ivLengthByte = ivLengthByte;
     }
 
     @Override
     public String execute(String pText) {
         try {
             return encrypt(pText);
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
+        } catch (InvalidAlgorithmParameterException |
+                NoSuchPaddingException |
+                IllegalBlockSizeException |
+                NoSuchAlgorithmException |
+                BadPaddingException |
+                InvalidKeyException e) {
             e.printStackTrace();
         }
         return null;
@@ -64,7 +59,7 @@ public class EncryptAction implements Action{
 
     private byte[] encrypt(byte[] pText, SecretKey secret, byte[] iv) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeyException {
         Cipher cipher = Cipher.getInstance(this.encryptAlgo);
-        cipher.init(Cipher.ENCRYPT_MODE, secret, new GCMParameterSpec(this.tagLenghtBit, iv));
+        cipher.init(Cipher.ENCRYPT_MODE, secret, new GCMParameterSpec(this.tagLengthBit, iv));
         byte[] encryptedText = cipher.doFinal(pText);
         return encryptedText;
     }
@@ -76,7 +71,7 @@ public class EncryptAction implements Action{
     }
 
     private byte[] generateIV() {
-        return getRandomNonce(this.ivLenghtByte);
+        return getRandomNonce(this.ivLengthByte);
     }
 
 }

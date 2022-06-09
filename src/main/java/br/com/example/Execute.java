@@ -16,17 +16,17 @@ public class Execute {
             e.printStackTrace();
         }
 
-        Crypto aesgcmCrypto = Crypto.init(keyTextBase64);
+        CryptoDirector cryptoDirector = CryptoDirector.init(keyTextBase64);
 
         String pText = "secret plain text";
         System.out.println("\n------ PTEXT ------");
         System.out.println(pText);
 
-        String cText = aesgcmCrypto.encrypt(pText);
+        String cText = cryptoDirector.encrypt(pText);
         System.out.println("\n------ CTEXT ------");
         System.out.println(cText);
 
-        String dText = aesgcmCrypto.decrypt(cText);
+        String dText = cryptoDirector.decrypt(cText);
         System.out.println("\n------ DTEXT ------");
         System.out.println(dText);
 
