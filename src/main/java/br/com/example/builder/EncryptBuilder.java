@@ -1,8 +1,10 @@
-package br.com.example;
+package br.com.example.builder;
+
+import br.com.example.action.EncryptAction;
 
 import javax.crypto.SecretKey;
 
-public class EncryptBuilder implements Builder{
+public class EncryptBuilder implements Builder {
 
     private SecretKey secretKey;
     private String encryptAlgo;

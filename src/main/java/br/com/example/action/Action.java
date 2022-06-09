@@ -1,4 +1,4 @@
-package br.com.example;
+package br.com.example.action;
 
 public interface Action {
 

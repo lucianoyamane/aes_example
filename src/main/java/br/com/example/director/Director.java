@@ -1,4 +1,8 @@
-package br.com.example;
+package br.com.example.director;
+
+import br.com.example.GenerateKey;
+import br.com.example.action.Action;
+import br.com.example.builder.Builder;
 
 import javax.crypto.SecretKey;
 
@@ -27,7 +31,7 @@ public abstract class Director {
         return builder;
     }
 
-    String execute(String text) {
+    public String execute(String text) {
         Action action = this.getBuilder()
                 .secretKey(this.getSecretKey())
                 .encryptAlgo(ENCRYPT_ALGO)

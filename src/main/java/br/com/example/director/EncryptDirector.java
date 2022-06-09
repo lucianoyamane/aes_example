@@ -1,6 +1,8 @@
-package br.com.example;
+package br.com.example.director;
 
-public class EncryptDirector extends Director{
+import br.com.example.builder.EncryptBuilder;
+
+public class EncryptDirector extends Director {
 
     private EncryptDirector(String keyBase64) {
         super(EncryptBuilder.init(), keyBase64);

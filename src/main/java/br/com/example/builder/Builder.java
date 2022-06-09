@@ -1,4 +1,6 @@
-package br.com.example;
+package br.com.example.builder;
+
+import br.com.example.action.Action;
 
 import javax.crypto.SecretKey;
 

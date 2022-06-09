@@ -1,4 +1,4 @@
-package br.com.example;
+package br.com.example.action;
 
 import javax.crypto.*;
 import javax.crypto.spec.GCMParameterSpec;
@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-public class EncryptAction implements Action{
+public class EncryptAction implements Action {
 
     private SecretKey secretKey;
     private String encryptAlgo;

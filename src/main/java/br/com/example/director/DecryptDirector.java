@@ -1,6 +1,8 @@
-package br.com.example;
+package br.com.example.director;
 
-public class DecryptDirector extends Director{
+import br.com.example.builder.DecryptBuilder;
+
+public class DecryptDirector extends Director {
 
     private DecryptDirector(String keyBase64) {
         super(DecryptBuilder.init(), keyBase64);
