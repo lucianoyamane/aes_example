@@ -1,4 +1,4 @@
-package br.com.example;
+package br.com.example.tool;
 
 import br.com.example.properties.ValueProperties;
 

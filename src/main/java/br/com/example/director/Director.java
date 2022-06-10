@@ -1,6 +1,6 @@
 package br.com.example.director;
 
-import br.com.example.GenerateKey;
+import br.com.example.tool.GenerateKey;
 import br.com.example.action.Action;
 import br.com.example.builder.Builder;
 import br.com.example.properties.ValueProperties;

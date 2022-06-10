@@ -3,7 +3,7 @@ package br.com.example;
 import br.com.example.director.DecryptDirector;
 import br.com.example.director.EncryptDirector;
 
-import static br.com.example.GenerateKey.generateKeyBase64;
+import static br.com.example.tool.GenerateKey.generateKeyBase64;
 
 public class Execute {
 
